@@ -1,0 +1,15 @@
+version: "2"
+services:
+    proxy:
+        image: nginx:stable-alpine
+        volumes:
+            - ./nginx/app:/root
+        working_dir: /root
+        ports:
+            - "80:80"
+            - "443:443"
+        command: /bin/sh -c "sh /root/script/run.sh"
+        restart: always
+        logging:
+            driver: "json-file"
+        network_mode: "bridge"
